@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import Image from "next/image";
 import { getMe, updateUser } from "@/lib/api/clientApi";
 import css from "./EditProfilePage.module.css";
+import type { User } from "@/types/user";
 
 export default function EditProfile() {
   const router = useRouter();
@@ -15,7 +16,7 @@ export default function EditProfile() {
 
   useEffect(() => {
     const loadUser = async () => {
-      const user = await getMe();
+      const user: User = await getMe();
       setUsername(user.username);
       setEmail(user.email);
       setAvatar(user.avatar);
@@ -25,7 +26,7 @@ export default function EditProfile() {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const updatedUser = await updateUser({ username });
+    const updatedUser: User = await updateUser({ username });
     setUser(updatedUser);
     router.push("/profile");
   };
@@ -63,7 +64,7 @@ export default function EditProfile() {
             <button
               type="button"
               className={css.cancelButton}
-              onClick={() => router.push("/profile")}
+              onClick={() => router.back()}
             >
               Cancel
             </button>
