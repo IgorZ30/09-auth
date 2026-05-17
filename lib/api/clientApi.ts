@@ -41,14 +41,8 @@ export const checkClientSession = async () => {
   return res.data.success;
 };
 
-export const updateUser = async ({
-  username,
-  email,
-}: {
-  username: string;
-  email: string;
-}) => {
-  const res = await api.patch<User>("/users/me", { username, email });
+export const updateUser = async ({ username }: { username: string }) => {
+  const res = await api.patch<User>("/users/me", { username });
   return res.data;
 };
 

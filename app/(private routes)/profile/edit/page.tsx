@@ -1,5 +1,5 @@
 "use client";
-
+import { useAuthStore } from "@/lib/store/authStore";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
@@ -11,6 +11,7 @@ export default function EditProfile() {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [avatar, setAvatar] = useState("");
+  const { setUser } = useAuthStore();
 
   useEffect(() => {
     const loadUser = async () => {
@@ -24,7 +25,8 @@ export default function EditProfile() {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    await updateUser({ username, email });
+    const updatedUser = await updateUser({ username });
+    setUser(updatedUser);
     router.push("/profile");
   };
 
