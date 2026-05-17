@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useState } from "react";
-import { fetchNotes } from "@/lib/api";
+import { fetchNotes } from "@/lib/api/clientApi";
 import NoteList from "@/components/NoteList/NoteList";
 import SearchBox from "@/components/SearchBox/SearchBox";
 import css from "./NotesPage.module.css";
@@ -26,7 +26,7 @@ export default function NotesClient({ tag = "" }: NotesClientProps) {
 
   const { data, isLoading, isError } = useQuery({
     queryKey: ["notes", currentPage, searchQuery, tag],
-    queryFn: () => fetchNotes(currentPage, searchQuery, tag),
+    queryFn: () => fetchNotes(searchQuery, currentPage, tag),
     placeholderData: keepPreviousData,
   });
 

@@ -4,6 +4,7 @@ import "./globals.css";
 import Header from "@/components/Header/Header";
 import Footer from "@/components/Footer/Footer";
 import TanStackProvider from "@/components/TanStackProvider/TanStackProvider";
+import AuthProvider from "@/components/AuthProvider/AuthProvider";
 
 const roboto = Roboto({
   weight: ["400", "700"],
@@ -19,7 +20,7 @@ export const metadata: Metadata = {
     title: "NoteHub",
     description:
       "A simple and efficient application for managing personal notes",
-    url: "https://08-zustand-gamma-gold.vercel.app",
+    url: "https://09-auth-xxxxx.vercel.app",
     images: [
       { url: "https://ac.goit.global/fullstack/react/notehub-og-meta.jpg" },
     ],
@@ -37,10 +38,12 @@ export default function RootLayout({
     <html lang="en">
       <body className={roboto.variable}>
         <TanStackProvider>
-          <Header />
-          <main>{children}</main>
-          {modal}
-          <Footer />
+          <AuthProvider>
+            <Header />
+            <main>{children}</main>
+            {modal}
+            <Footer />
+          </AuthProvider>
         </TanStackProvider>
       </body>
     </html>
